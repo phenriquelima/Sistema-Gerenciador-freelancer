@@ -1,12 +1,13 @@
-FROM composer AS composer
+# FROM composer AS composer
 
 FROM php:5.6-apache
 
 # COPY --from=composer /usr/bin/composer /usr/bin/composer
 
+RUN echo "deb http://archive.debian.org/debian stretch main contrib non-free" > /etc/apt/sources.list
 RUN a2enmod rewrite
 
-RUN apt-get update
+RUN apt update
 
 RUN apt-get install -y git zip unzip libzip-dev zlib1g-dev libmcrypt-dev libpng-dev nano \
  && apt-get install --yes --force-yes cron g++ gettext libicu-dev openssl libmcrypt-dev libc-client-dev libkrb5-dev  libxml2-dev libfreetype6-dev libgd-dev libmcrypt-dev bzip2 libbz2-dev libtidy-dev libcurl4-openssl-dev libz-dev libmemcached-dev libxslt-dev \
